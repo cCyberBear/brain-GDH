@@ -15,10 +15,7 @@ const data = [
 const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={["#F2F2F2", "#F8D800"]} // These are example colors, you can change these hex codes to match your gradient
-        style={styles.gradient}
-      >
+      <LinearGradient colors={["#F2F2F2", "#ffd363"]} style={styles.gradient}>
         <View style={styles.carouselContainer}>
           <Carousel
             data={data}

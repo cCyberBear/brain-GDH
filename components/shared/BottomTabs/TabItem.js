@@ -42,14 +42,16 @@ const TabItem = ({ label, icon, index, activeIndex, onTabPress }) => {
     };
   });
   const iconColor = useSharedValue(
-    activeIndex === index + 1 ? "white" : "rgba(128,128,128,0.8)"
+    activeIndex === index + 1
+      ? "rgba(128,128,128,0.8)"
+      : "rgba(128,128,128,0.8)"
   );
 
   //Adjust Icon color for this first render
   useEffect(() => {
     animatedActiveIndex.value = activeIndex;
     if (activeIndex === index + 1) {
-      iconColor.value = withTiming("white");
+      iconColor.value = withTiming("rgba(128,128,128,0.8)");
     } else {
       iconColor.value = withTiming("rgba(128,128,128,0.8)");
     }
