@@ -1,19 +1,28 @@
 import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Button,
+  TouchableOpacity,
+} from "react-native";
 
-const Card = () => {
+const Card = ({ navigation }) => {
   return (
-    <View style={styles.cardContainer}>
-      <Image
-        source={{ uri: "https://picsum.photos/900/900" }}
-        style={styles.image}
-        resizeMode="contain"
-      />
-      <View style={styles.textContainer}>
-        <Text style={styles.mainText}>Trò Chơi Tập Trung</Text>
-        <Text style={styles.subText}>4 Trò Chơi</Text>
+    <TouchableOpacity onPress={() => navigation.navigate("Shopping")}>
+      <View style={styles.cardContainer}>
+        <Image
+          source={{ uri: "https://picsum.photos/900/900" }}
+          style={styles.image}
+          resizeMode="contain"
+        />
+        <View style={styles.textContainer}>
+          <Text style={styles.mainText}>Trò Chơi Tập Trung</Text>
+          <Text style={styles.subText}>4 Trò Chơi</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

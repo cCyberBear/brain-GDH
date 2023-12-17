@@ -12,14 +12,17 @@ const data = [
   { title: "Item 5" },
 ];
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
+  const renderCard = ({ item }) => {
+    return <Card item={item} navigation={navigation} />;
+  };
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient colors={["#F2F2F2", "#ffd363"]} style={styles.gradient}>
         <View style={styles.carouselContainer}>
           <Carousel
             data={data}
-            renderItem={Card}
+            renderItem={renderCard}
             sliderWidth={300}
             itemWidth={300}
           />
