@@ -25,9 +25,17 @@ const App = () => {
     <SafeAreaProvider>
       <StatusBar barStyle="dark-content" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="BottomTabs" headerMode="none">
-          <Stack.Screen name="BottomTabs" component={BottomTabs} />
-          <Stack.Screen name="Shopping" component={ShoppingScreen} />
+        <Stack.Navigator initialRouteName="BottomTabs">
+          <Stack.Screen
+            name="BottomTabs"
+            options={{ title: "Chọn trò chơi" }}
+            component={BottomTabs}
+          />
+          <Stack.Screen
+            name="Shopping"
+            options={{ title: "Shopping Game", headerBackTitle: " " }}
+            component={ShoppingScreen}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>
