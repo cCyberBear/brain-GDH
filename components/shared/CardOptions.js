@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,10 +7,20 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
+import LevelOptionsModal from "../../screens/gameScreen/math/findSum/LevelOptionsModal";
 
-const Card = ({ item, navigation }) => {
+const CardOptions = ({ item, navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const navigatePage = (value) => {
+    if (value.link == "FindSum") {
+      setModalVisible(true);
+    } else {
+      navigation.navigate(value.link);
+    }
+  };
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(item.link)}>
+    <TouchableOpacity onPress={() => navigatePage(item)}>
       <View style={styles.cardContainer}>
         <Image source={item.image} style={styles.image} resizeMode="contain" />
         <View style={styles.textContainer}>
@@ -22,6 +32,12 @@ const Card = ({ item, navigation }) => {
           </View>
         </View>
       </View>
+      {modalVisible && (
+        <LevelOptionsModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+        />
+      )}
     </TouchableOpacity>
   );
 };
@@ -60,4 +76,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Card;
+export default CardOptions;
