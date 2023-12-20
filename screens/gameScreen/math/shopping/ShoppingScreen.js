@@ -4,24 +4,22 @@ import {
   Text,
   View,
   StyleSheet,
-  TouchableOpacity,
   ImageBackground,
-  ScrollView,
-  Animated,
-  Button,
+  Modal,
+  Pressable,
+  Image,
 } from "react-native";
-import * as Progress from "react-native-progress";
-import CountDown from "react-native-countdown-component";
 import Icon from "react-native-vector-icons/FontAwesome";
 import BoxQuestion from "./BoxQuestion";
 import Carousel from "react-native-snap-carousel";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 
-const ShoppingScreen = () => {
+const ShoppingScreen = ({ navigation }) => {
   const carouselRef = useRef(null);
   const [randomNumbers, setRandomNumbers] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [questionList, setQuestionList] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
   const [count, setCount] = useState(0);
 
   const handleButtonClick = () => {
@@ -32,7 +30,11 @@ const ShoppingScreen = () => {
 
   const generateRandomNumbers = (id) => {
     const newRandomNumber1 = Math.floor(Math.random() * 100) + 1;
-    const newRandomNumber2 = Math.floor(Math.random() * 100) + 1;
+    let newRandomNumber2;
+    do {
+      newRandomNumber2 = Math.floor(Math.random() * 100) + 1;
+    } while (newRandomNumber2 === newRandomNumber1);
+
     setRandomNumbers([newRandomNumber1, newRandomNumber2]);
     const newQuestion = {
       number1: newRandomNumber1,
@@ -78,24 +80,8 @@ const ShoppingScreen = () => {
             <Text style={styles.text}>
               <Icon name="clock-o" size={14} color="#fff" /> Thời gian còn lại
             </Text>
-            {/* <CountDown
-              digitStyle={{
-                backgroundColor: "#FFF",
-                borderWidth: 2,
-                borderRadius: 50,
-                height: 50,
-                width: 50,
-                borderColor: "#1CC625",
-                margin: 8,
-              }}
-              running="true"
-              timeToShow={["S"]}
-              until={10}
-              onFinish={onFinish}
-              size={20}
-              timeLabels=""
-            /> */}
             <CountdownCircleTimer
+              onComplete={() => setModalVisible(true)}
               size={80}
               isPlaying
               duration={60}
@@ -106,8 +92,6 @@ const ShoppingScreen = () => {
               )}
             </CountdownCircleTimer>
           </View>
-          {/* <Progress.Bar progress={1} width={300} /> */}
-
           <View style={styles.questionBox}>
             <View style={styles.box}>
               <Carousel
@@ -116,11 +100,9 @@ const ShoppingScreen = () => {
                 layout={"default"}
                 useScrollView={true}
                 renderItem={renderCard}
-                sliderWidth={300}
-                itemWidth={300}
+                sliderWidth={335}
+                itemWidth={335}
                 scrollEnabled={false}
-                autoplay
-                autoplayInterval={10000}
                 onSnapToItem={(index) => setCurrentIndex(index)}
                 enableSnap={true}
                 loop={false}
@@ -128,6 +110,37 @@ const ShoppingScreen = () => {
             </View>
           </View>
         </View>
+        <Modal animationType="slide" transparent={true} visible={modalVisible}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Image
+                style={{ width: "50%", height: "50%" }}
+                source={require("../../../../assets/brain.png")}
+              />
+              <Text style={styles.modalText}>
+                Bạn đã hoàn thành{" "}
+                <Text style={{ fontWeight: "bold", color: "green" }}>
+                  {count}
+                </Text>{" "}
+                câu trong 60 giây !!!
+              </Text>
+              <View style={{ flexDirection: "row", gap: 14 }}>
+                <Pressable
+                  style={[styles.button, styles.buttonHome]}
+                  onPress={() => navigation.navigate("BottomTabs")}
+                >
+                  <Text style={styles.textStyle}>Trang chủ</Text>
+                </Pressable>
+                <Pressable
+                  style={[styles.button, styles.buttonClose]}
+                  onPress={() => navigation.navigate("Shopping")}
+                >
+                  <Text style={styles.textStyle}>Làm lại</Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -186,10 +199,56 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 10,
   },
-
   innerContainer: {
     flex: 1,
     backgroundColor: "rgba(0,0,0, 0.60)",
     paddingTop: 20,
+  },
+
+  //Modal
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    width: "94%",
+    height: "50%",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 4,
+    padding: 10,
+  },
+  buttonHome: {
+    color: " grey",
+    backgroundColor: "grey",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontSize: 16,
+    marginRight: 50,
+    marginLeft: 50,
   },
 });

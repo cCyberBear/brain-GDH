@@ -1,66 +1,37 @@
-import React, { useEffect, useRef, useState } from "react";
-import {
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity,
-  Animated,
-  Button,
-} from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import * as Progress from "react-native-progress";
-import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
+import React, { useRef, useState } from "react";
+import { Text, StyleSheet, TouchableOpacity, Animated } from "react-native";
+import Toast from "react-native-toast-message";
 
-const BoxQuestion = ({
-  randomNumbers,
-  item,
-  setCount,
-  count,
-  handleButtonClick,
-}) => {
+const BoxQuestion = ({ item, setCount, count, handleButtonClick }) => {
   const translateY = useRef(new Animated.Value(0)).current;
-  const [progress, setProgress] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isDisabled, setDisabled] = useState(false);
   const handlePress = (number) => {
     if (number < item.number1 || number < item.number2) {
-      alert("good");
+      Toast.show({
+        type: "success",
+        text1: "CÂU TRẢ LỜI CHÍNH XÁC !!!",
+      });
       setCount(count + 1);
     } else {
-      alert("stupid");
+      Toast.show({
+        type: "error",
+        text1: "CÂU TRẢ LỜI KHÔNG ĐÚNG !!!",
+      });
     }
     setDisabled(true);
     setIsVisible(true);
     setIsChecked(true);
     setTimeout(() => {
       handleButtonClick();
-    }, 5000);
+    }, 2000);
   };
-  //   useEffect(() => {
-  //     const totalTimeInSeconds = 10;
-  //     const interval = 100;
-  //     const steps = (totalTimeInSeconds * 1000) / interval;
-  //     const timer = setInterval(() => {
-  //       setProgress((prevProgress) => Math.max(prevProgress - 1 / steps, 0));
-  //     }, interval);
-  //     const timeout = setTimeout(() => {
-  //       clearInterval(timer);
-  //       setProgress(1);
-  //     }, totalTimeInSeconds * 1000);
-  //     return () => {
-  //       clearInterval(timer);
-  //       clearTimeout(timeout);
-  //     };
-  //   }, []);
   return (
     <>
       <Text
         style={{
-          color: "#fff",
+          color: "#333",
           fontWeight: "bold",
           fontSize: 20,
           marginBottom: 10,
@@ -70,7 +41,7 @@ const BoxQuestion = ({
       </Text>
       <Text style={styles.question}>Biểu thức nào có giá trị bé hơn</Text>
       <TouchableOpacity
-        style={isChecked ? styles.disabledButton : styles.buttonText}
+        style={isChecked ? styles.disabledButton : styles.button}
         onPress={() => handlePress(item?.number1)}
         disabled={isChecked ? true : false}
         title={(item?.number1).toString()}
@@ -78,7 +49,7 @@ const BoxQuestion = ({
         <Text>{(item?.number1).toString()}</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        style={isChecked ? styles.disabledButton : styles.buttonText}
+        style={isChecked ? styles.disabledButton : styles.button}
         disabled={isChecked ? true : false}
         onPress={() => handlePress(item?.number2)}
         title={(item?.number2).toString()}
@@ -139,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
   },
-  buttonText: {
+  button: {
     borderWidth: 1,
     padding: 12,
     borderColor: "#D3D3D3",
@@ -148,11 +119,12 @@ const styles = StyleSheet.create({
   },
   disabledButton: {
     borderWidth: 1,
-    borderColor: "black",
+    borderColor: "#9da09e",
     padding: 12,
     marginBottom: 10,
     borderRadius: 12,
-    backgroundColor: "grey",
+    backgroundColor: "#d3d4d3",
+    color: "red",
   },
   notification: {
     position: "absolute",

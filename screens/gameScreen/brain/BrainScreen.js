@@ -1,51 +1,35 @@
 import React from "react";
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import Carousel from "react-native-snap-carousel";
-import Card from "../components/shared/Card";
 import { LinearGradient } from "expo-linear-gradient";
-import brain1 from "../assets/brain1.png";
-import brain2 from "../assets/brain2.png";
-import brain3 from "../assets/brain3.png";
-import brain4 from "../assets/brain4.png";
+import math1 from "../../../assets/math1.png";
+import math2 from "../../../assets/math2.png";
+import Card from "../../../components/shared/Card";
 
 const data = [
   {
     id: 1,
-    title: "Trò chơi tập trung",
+    title: "Trò chơi mua sắm",
     quanity: 4,
-    image: brain1,
-    link: "Focus",
+    image: math2,
+    link: "Shopping",
   },
   {
     id: 2,
-    title: "Trò chơi não",
+    title: "Trò chơi tính toán",
     quanity: 2,
-    image: brain2,
-    link: "Brain",
-  },
-  {
-    id: 3,
-    title: "Trò chơi ngôn ngữ",
-    quanity: 1,
-    image: brain3,
-    link: "Language",
-  },
-  {
-    id: 4,
-    title: "Trò chơi trí nhớ",
-    quanity: 2,
-    image: brain4,
-    link: "Math",
+    image: math1,
+    link: "FindSum",
   },
 ];
 
-const HomeScreen = ({ navigation }) => {
+const BrainScreen = ({ navigation }) => {
   const renderCard = ({ item }) => {
     return <Card item={item} navigation={navigation} />;
   };
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient colors={["#ffffff", "#ffd363"]} style={styles.gradient}>
+      <LinearGradient colors={["#F2F2F2", "#ffd363"]} style={styles.gradient}>
         <View style={styles.carouselContainer}>
           <Carousel
             contentContainerCustomStyle={{ alignItems: "center" }}
@@ -60,7 +44,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
-export default HomeScreen;
+export default BrainScreen;
 
 const styles = StyleSheet.create({
   container: {
