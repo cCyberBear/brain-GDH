@@ -14,6 +14,7 @@ import LevelOptionsModal from "./screens/gameScreen/math/findSum/LevelOptionsMod
 import LanguageScreen from "./screens/gameScreen/language/LanguageScreen";
 import BrainScreen from "./screens/gameScreen/brain/BrainScreen";
 import FocusScreen from "./screens/gameScreen/focus/FocusScreen";
+import WordMap from "./screens/gameScreen/language/WordMap/WordMap";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -56,6 +57,11 @@ const App = () => {
               name="Language"
               options={{ title: "Language Game", headerBackTitle: " " }}
               component={LanguageScreen}
+            />
+            <Stack.Screen
+              name="WordMap"
+              options={{ title: "Word Map Game", headerBackTitle: " " }}
+              component={WordMap}
             />
 
             {/* Focus Game */}
