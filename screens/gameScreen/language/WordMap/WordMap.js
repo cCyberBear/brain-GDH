@@ -224,11 +224,11 @@ const WordMap = () => {
           ...prevCorrectWords,
           selectedWord,
         ]);
+        setSelectedCells([]);
         setDisabledWords((prevDisabledWords) => [
           ...prevDisabledWords,
           ...newSelectedCells,
         ]);
-        setSelectedCells([]);
         Toast.show({
           type: "success",
           text1: `CÂU TRẢ LỜI CHÍNH XÁC !!!: ${selectedWord}`,
@@ -243,7 +243,7 @@ const WordMap = () => {
   };
 
   const checkGameCompletion = () => {
-    if (correctWords.length === words.length) {
+    if (correctWords.length + 1 === words.length) {
       resetGame();
     }
   };
@@ -283,9 +283,9 @@ const WordMap = () => {
                     : null,
                 ]}
                 onPress={() => handleCellPress(rowIndex, colIndex)}
-                disabled={disabledWords.some(
-                  (obj) => obj.row === rowIndex && obj.col === colIndex
-                )}
+                // disabled={disabledWords.some(
+                //   (obj) => obj.row === rowIndex && obj.col === colIndex
+                // )}
               >
                 <Text style={styles.cellText}>{cell}</Text>
               </TouchableOpacity>
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     margin: 5,
     padding: 10,
-    backgroundColor: "#4CAF50", // Word box background color
+    backgroundColor: "#333333", // Word box background color
     color: "#ffffff", // Word text color
     borderRadius: 5,
   },
@@ -372,7 +372,7 @@ const styles = StyleSheet.create({
     color: "#333333",
   },
   correctWord: {
-    backgroundColor: "#4CAF50", // Green for correct words
+    backgroundColor: "#FF6347",
     color: "#ffffff",
   },
   incorrectWord: {
