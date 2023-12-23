@@ -1,7 +1,14 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { Image, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 
-const LevelOptionsModal = ({ modalVisible, setModalVisible, navigation }) => {
+const LevelOptionsModal = ({ modalVisible, setModalVisible }) => {
+  const navigation = useNavigation();
+  const levels = [
+    { level: 1, id: 1 },
+    { level: 2, id: 2 },
+    { level: 3, id: 3 },
+  ];
   return (
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
       <View style={styles.centeredView}>
@@ -11,24 +18,20 @@ const LevelOptionsModal = ({ modalVisible, setModalVisible, navigation }) => {
           </Pressable>
           <Text style={styles.modalText}>Chọn mức độ</Text>
           <View style={{ flexDirection: "column", gap: 14 }}>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => navigation.navigate("Shopping")}
-            >
-              <Text style={styles.textStyle}>Cấp độ 1</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => navigation.navigate("Shopping")}
-            >
-              <Text style={styles.textStyle}>Cấp độ 2</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => navigation.navigate("Shopping")}
-            >
-              <Text style={styles.textStyle}>Cấp độ 3</Text>
-            </Pressable>
+            {levels.map((value, index) => (
+              <Pressable
+                key={index}
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  navigation.navigate("FindSum", {
+                    level: value.level,
+                  });
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Cấp độ {value.level}</Text>
+              </Pressable>
+            ))}
           </View>
         </View>
       </View>

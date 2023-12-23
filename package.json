@@ -26,6 +26,7 @@
     "react-native": "0.73.1",
     "react-native-countdown-circle-timer": "^3.2.1",
     "react-native-countdown-component": "^2.7.1",
+    "react-native-multiple-choice": "^0.0.8",
     "react-native-navigation-bar-color": "^2.0.2",
     "react-native-progress": "^5.0.1",
     "react-native-reanimated": "^3.3.0",
