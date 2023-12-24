@@ -14,6 +14,20 @@ const data = [
     image: math2,
     link: "WordMap",
   },
+  {
+    id: 2,
+    title: "Đoán chữ",
+    quanity: 4,
+    image: math2,
+    link: "WordPredict",
+  },
+  {
+    id: 3,
+    title: "Xếp chữ",
+    quanity: 4,
+    image: math2,
+    link: "WordArrangement",
+  },
 ];
 
 const LanguageScreen = ({ navigation }) => {
