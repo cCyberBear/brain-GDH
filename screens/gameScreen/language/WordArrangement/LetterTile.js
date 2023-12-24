@@ -11,10 +11,11 @@ const LetterTile = ({ letter, onPress }) => {
 
 const styles = StyleSheet.create({
   tile: {
-    backgroundColor: "#3498db",
-    padding: 10,
-    margin: 5,
-    borderRadius: 5,
+    backgroundColor: "#2ecc71",
+    padding: 20,
+    margin: 10,
+    borderRadius: 15,
+    elevation: 5,
   },
   letter: {
     color: "#fff",
