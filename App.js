@@ -15,6 +15,8 @@ import LanguageScreen from "./screens/gameScreen/language/LanguageScreen";
 import BrainScreen from "./screens/gameScreen/brain/BrainScreen";
 import FocusScreen from "./screens/gameScreen/focus/FocusScreen";
 import WordMap from "./screens/gameScreen/language/WordMap/WordMap";
+import WordPredict from "./screens/gameScreen/language/WordPredict/WordPredict";
+import WordArrangement from "./screens/gameScreen/language/WordArrangement/WordArrangement";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -60,8 +62,18 @@ const App = () => {
             />
             <Stack.Screen
               name="WordMap"
-              options={{ title: "Word Map Game", headerBackTitle: " " }}
+              options={{ title: "Ma trận chữ", headerBackTitle: " " }}
               component={WordMap}
+            />
+            <Stack.Screen
+              name="WordPredict"
+              options={{ title: "Đoán chữ", headerBackTitle: " " }}
+              component={WordPredict}
+            />
+            <Stack.Screen
+              name="WordArrangement"
+              options={{ title: "Xếp chữ", headerBackTitle: " " }}
+              component={WordArrangement}
             />
 
             {/* Focus Game */}
