@@ -17,6 +17,8 @@ import FocusScreen from "./screens/gameScreen/focus/FocusScreen";
 import WordMap from "./screens/gameScreen/language/WordMap/WordMap";
 import WordPredict from "./screens/gameScreen/language/WordPredict/WordPredict";
 import WordArrangement from "./screens/gameScreen/language/WordArrangement/WordArrangement";
+import FlipCard from "./screens/gameScreen/brain/FlipCard/FlipCard";
+import MemoryTest from "./screens/gameScreen/brain/MemoryTest/MemoryTest";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -88,6 +90,16 @@ const App = () => {
               name="Brain"
               options={{ title: "Brain Game", headerBackTitle: " " }}
               component={BrainScreen}
+            />
+            <Stack.Screen
+              name="FlipCard"
+              options={{ title: "Flip Card Game", headerBackTitle: " " }}
+              component={FlipCard}
+            />
+            <Stack.Screen
+              name="MemoryTest"
+              options={{ title: "Memory Test Game", headerBackTitle: " " }}
+              component={MemoryTest}
             />
           </Stack.Navigator>
           <Toast position="bottom" bottomOffset={80} visibilityTime={2000} />

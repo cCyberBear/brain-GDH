@@ -9,17 +9,17 @@ import Card from "../../../components/shared/Card";
 const data = [
   {
     id: 1,
-    title: "Trò chơi mua sắm",
+    title: "Trò chơi lật mặt",
     quanity: 4,
     image: math2,
-    link: "Shopping",
+    link: "FlipCard",
   },
   {
     id: 2,
-    title: "Trò chơi tính toán",
-    quanity: 2,
-    image: math1,
-    link: "FindSum",
+    title: "Kiểm tra trí nh",
+    quanity: 4,
+    image: math2,
+    link: "MemoryTest",
   },
 ];
 
