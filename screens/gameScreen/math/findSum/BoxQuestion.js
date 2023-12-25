@@ -2,14 +2,22 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import Toast from "react-native-toast-message";
 
-const BoxQuestion = ({ item, setScore, setIsPlaying }) => {
-  const level = 100;
+const BoxQuestion = ({ item, setScore, setIsPlaying, level, currentIndex }) => {
   const [array, setArray] = useState([item]);
+  let rightAnswer;
+  switch (level) {
+    case 2:
+      rightAnswer = 100;
+      break;
+    case 3:
+      rightAnswer = 1000;
+      break;
+    default:
+      rightAnswer = 10;
+      break;
+  }
   const [selectedChoices, setSelectedChoices] = useState([]);
   const [unableClick, setUnableClick] = useState(false);
-  const transformedArray = array.flatMap((obj) => {
-    return Object.entries(obj).map(([key, value]) => ({ [key]: value }));
-  });
   const handlePress = (choice) => {
     const isChecked = selectedChoices.includes(choice);
     if (isChecked) {
@@ -19,7 +27,7 @@ const BoxQuestion = ({ item, setScore, setIsPlaying }) => {
         setSelectedChoices([...selectedChoices, choice]);
         if (selectedChoices.length == 1) {
           const result = selectedChoices[0] + choice;
-          if (result && result === level) {
+          if (result && result === rightAnswer) {
             setScore((preScore) => preScore + 300);
             Toast.show({
               type: "success",
@@ -36,7 +44,9 @@ const BoxQuestion = ({ item, setScore, setIsPlaying }) => {
       }
     }
   };
-
+  const transformedArray = array.flatMap((obj) => {
+    return Object.entries(obj).map(([key, value]) => ({ [key]: value }));
+  });
   const shuffleArray = () => {
     const shuffledItems = [...transformedArray];
     for (let i = shuffledItems.length - 1; i > 0; i--) {

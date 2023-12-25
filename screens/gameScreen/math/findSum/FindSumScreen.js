@@ -17,7 +17,6 @@ import BoxQuestion from "./BoxQuestion";
 const FindSumScreen = ({ route, navigation }) => {
   const { level } = route.params;
   const carouselRef = useRef(null);
-  const sum = 100;
   const [modalVisible, setModalVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [questionList, setQuestionList] = useState([]);
@@ -27,44 +26,42 @@ const FindSumScreen = ({ route, navigation }) => {
   const [key, setKey] = useState(0);
 
   const generateRandomNumbers = (id) => {
+    let sumQuestion;
+    switch (level) {
+      case 2:
+        sumQuestion = 99;
+        break;
+      case 3:
+        sumQuestion = 999;
+        break;
+      default:
+        sumQuestion = 9;
+        break;
+    }
     // change level
-    const newRandomNumber1 = Math.floor(Math.random() * 99) + 1;
-    const newRandomNumber2 = 100 - newRandomNumber1;
-    const newRandomNumber3 = Math.floor(Math.random() * 99) + 1;
-    const newRandomNumber4 = Math.floor(Math.random() * 99) + 1;
-    const newRandomNumber5 = Math.floor(Math.random() * 99) + 1;
-    // switch (level) {
-    //   case 1:
-    //     newRandomNumber1 = Math.floor(Math.random() * 100) + 1;
-    //     do {
-    //       newRandomNumber2 = Math.floor(Math.random() * 100) + 1;
-    //     } while (newRandomNumber2 === newRandomNumber1);
-    //     break;
-    //   case 2:
-    //     newRandomNumber1 = Math.floor(Math.random() * 100) + 1;
-    //     do {
-    //       newRandomNumber2 = Math.floor(Math.random() * 100) + 1;
-    //     } while (newRandomNumber2 === newRandomNumber1);
-    //     break;
-    //   default:
-    //     newRandomNumber1 = Math.floor(Math.random() * 100) + 1;
-    //     do {
-    //       newRandomNumber2 = Math.floor(Math.random() * 100) + 1;
-    //     } while (newRandomNumber2 === newRandomNumber1);
-    //     break;
-    // }
+    const newRandomNumber1 = Math.floor(Math.random() * sumQuestion) + 1;
+    const newRandomNumber2 = sumQuestion + 1 - newRandomNumber1;
+    const newRandomNumber3 = Math.floor(Math.random() * sumQuestion) + 1;
+    const newRandomNumber4 = Math.floor(Math.random() * sumQuestion) + 1;
+    const newRandomNumber5 = Math.floor(Math.random() * sumQuestion) + 1;
+    const newRandomNumber6 = Math.floor(Math.random() * sumQuestion) + 1;
+
     const newQuestion = {
+      id: id,
       number1: newRandomNumber1,
       number2: newRandomNumber2,
       number3: newRandomNumber3,
       number4: newRandomNumber4,
       number5: newRandomNumber5,
-      id: id,
+      number6: newRandomNumber6,
     };
-    setQuestionList((prevQuestionList) => [...prevQuestionList, newQuestion]);
+    setQuestionList((prevQuestionList) => {
+      return [...prevQuestionList, newQuestion];
+    });
   };
-  const generate20Questions = () => {
-    for (let i = 1; i <= 20; i++) {
+
+  const generate15Questions = () => {
+    for (let i = 1; i <= 15; i++) {
       generateRandomNumbers(i);
     }
   };
@@ -76,6 +73,8 @@ const FindSumScreen = ({ route, navigation }) => {
         key={item.id}
         setScore={setScore}
         setIsPlaying={setIsPlaying}
+        level={level}
+        currentIndex={currentIndex}
       />
     );
   };
@@ -95,7 +94,7 @@ const FindSumScreen = ({ route, navigation }) => {
   };
 
   useEffect(() => {
-    generate20Questions();
+    generate15Questions();
   }, []);
   return (
     <SafeAreaView style={styles.container}>

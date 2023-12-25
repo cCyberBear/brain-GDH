@@ -5,9 +5,9 @@ import { Image, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 const LevelOptionsModal = ({ modalVisible, setModalVisible }) => {
   const navigation = useNavigation();
   const levels = [
-    { level: 1, id: 1 },
-    { level: 2, id: 2 },
-    { level: 3, id: 3 },
+    { id: 1, level: 1 },
+    { id: 2, level: 2 },
+    { id: 3, level: 3 },
   ];
   return (
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
