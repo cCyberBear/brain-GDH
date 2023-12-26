@@ -197,7 +197,6 @@ const WordArrangement = () => {
   }
   const createWordOnLevel = (level) => {
     const createdWord = generateRandomWord(level);
-    console.log(createdWord);
     setWord(createdWord);
     setShuffledWord(
       createdWord
