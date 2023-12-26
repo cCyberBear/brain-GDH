@@ -33,7 +33,6 @@ const FlipCard = () => {
       { length: imagesPerLevel },
       (_, index) => index + 1
     );
-    console.log(availableImages);
     // Duplicate each image to create pairs
     const allImages = [...availableImages, ...availableImages];
 

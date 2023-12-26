@@ -175,7 +175,6 @@ const generateGrid = (wordList, gridSize) => {
     }
   }
 
-  console.log("🚀 ~ file: WordMap.js:183 ~ generateGrid ~ grid:", grid);
   return grid;
 };
 
@@ -229,7 +228,6 @@ const WordMap = () => {
           text1: `CÂU TRẢ LỜI CHÍNH XÁC !!!: ${selectedWord}`,
         });
         if (correctWords.length + 1 === words.length) {
-          console.log("dodasdasdasd");
           resetGame();
         }
       }
@@ -241,18 +239,13 @@ const WordMap = () => {
   };
 
   const resetGame = () => {
-    try {
-      const newList = randomWords(BigList, levels[curLevel + 1].amount);
-      console.log("🚀 ~ file: WordMap.js:246 ~ resetGame ~ newList:", newList);
-      setWords(newList);
-      setGrid(generateGrid(newList, levels[curLevel + 1].gridSize));
-      setSelectedCells([]);
-      setCorrectWords([]);
-      setDisabledWords([]);
-      setCurLevel((pre) => pre + 1);
-    } catch (error) {
-      console.log("🚀 ~ file: WordMap.js:254 ~ resetGame ~ error:", error);
-    }
+    const newList = randomWords(BigList, levels[curLevel + 1].amount);
+    setWords(newList);
+    setGrid(generateGrid(newList, levels[curLevel + 1].gridSize));
+    setSelectedCells([]);
+    setCorrectWords([]);
+    setDisabledWords([]);
+    setCurLevel((pre) => pre + 1);
   };
 
   useEffect(() => {

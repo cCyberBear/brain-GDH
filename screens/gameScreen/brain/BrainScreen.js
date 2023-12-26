@@ -16,7 +16,7 @@ const data = [
   },
   {
     id: 2,
-    title: "Kiểm tra trí nh",
+    title: "Kiểm tra trí nhớ",
     quanity: 4,
     image: math2,
     link: "MemoryTest",
