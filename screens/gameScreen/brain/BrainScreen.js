@@ -21,6 +21,13 @@ const data = [
     image: math2,
     link: "MemoryTest",
   },
+  {
+    id: 3,
+    title: "Kiểm tra trí nhớ 2",
+    quanity: 4,
+    image: math2,
+    link: "MemoryTest2",
+  },
 ];
 
 const BrainScreen = ({ navigation }) => {
