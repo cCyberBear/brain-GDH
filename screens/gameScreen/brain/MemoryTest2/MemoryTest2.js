@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ImageBackground,
+} from "react-native";
 import Toast from "react-native-toast-message";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const colors = [
   "red",
@@ -38,27 +45,27 @@ const levels = {
   },
   5: {
     color: 9,
-    timeReveal: 5,
+    timeReveal: 8,
   },
   6: {
     color: 9,
-    timeReveal: 5,
+    timeReveal: 7,
   },
   7: {
     color: 12,
-    timeReveal: 5,
+    timeReveal: 12,
   },
   8: {
     color: 12,
-    timeReveal: 4,
+    timeReveal: 11,
   },
   9: {
     color: 15,
-    timeReveal: 5,
+    timeReveal: 13,
   },
   10: {
     color: 15,
-    timeReveal: 4,
+    timeReveal: 12,
   },
 };
 
@@ -146,19 +153,27 @@ const MemoryTest2 = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.score}>{`Score: ${score}`}</Text>
-      <Text style={styles.timer}>{`Time: ${timeRemaining}s`}</Text>
-      <View style={styles.cardContainer}>
-        {cards.map((card, index) => (
-          <TouchableOpacity
-            key={index}
-            style={[styles.card, { backgroundColor: card.color }]}
-            onPress={() => handleCardPress(card.color)}
-          >
-            <Text style={styles.text}>{card.number}</Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+      <ImageBackground
+        source={require("../../../../assets/bgImage.png")}
+        style={styles.image}
+      >
+        <Text style={styles.score}>
+          <Icon name="trophy" size={18} color="#fff" />
+          {` Điểm: ${score}`}
+        </Text>
+        <Text style={styles.timer}>{`Thời gian: ${timeRemaining}s`}</Text>
+        <View style={styles.cardContainer}>
+          {cards.map((card, index) => (
+            <TouchableOpacity
+              key={index}
+              style={[styles.card, { backgroundColor: card.color }]}
+              onPress={() => handleCardPress(card.color)}
+            >
+              <Text style={styles.text}>{card.number}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -167,20 +182,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f0f0f0", // Light background color
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
   score: {
     marginBottom: 10,
     fontSize: 20,
     fontWeight: "bold", // Make the font bold
-    color: "#333", // Darker text color
+    color: "#fff", // Darker text color
+    textAlign: "center",
   },
   timer: {
     marginBottom: 10,
     fontSize: 20,
     fontWeight: "bold",
-    color: "#333",
+    color: "#fff",
+    textAlign: "center",
   },
   cardContainer: {
     flexDirection: "row",

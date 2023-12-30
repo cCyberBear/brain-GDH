@@ -3,23 +3,16 @@ import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import { LinearGradient } from "expo-linear-gradient";
 import math1 from "../../../assets/math1.png";
-import math2 from "../../../assets/math2.png";
+import colorImage from "../../../assets/colorImage.jpeg";
 import Card from "../../../components/shared/Card";
 
 const data = [
   {
     id: 1,
-    title: "Trò chơi mua sắm",
-    quanity: 4,
-    image: math2,
-    link: "Shopping",
-  },
-  {
-    id: 2,
-    title: "Trò chơi tính toán",
-    quanity: 2,
-    image: math1,
-    link: "FindSum",
+    title: "Tập trung màu sắc",
+    quanity: "Bạn hãy nhớ và chọn lại đúng những thẻ đã đổi màu.",
+    image: colorImage,
+    link: "MemoryTest",
   },
 ];
 

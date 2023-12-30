@@ -1,27 +1,24 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React from "react";
-import { Modal, Pressable, StatusBar } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import BottomTabs from "./containers/BottomTabs";
-import changeNavigationBarColor from "react-native-navigation-bar-color";
 import { createStackNavigator } from "@react-navigation/stack";
-import ShoppingScreen from "./screens/gameScreen/math/shopping/ShoppingScreen";
-import HomeScreen from "./screens/HomeScreen";
+import React from "react";
+import { StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import Toast from "react-native-toast-message";
-import FindSumScreen from "./screens/gameScreen/math/findSum/FindSumScreen";
-import MathScreen from "./screens/gameScreen/math/MathScreen";
-import LevelOptionsModal from "./screens/gameScreen/math/findSum/LevelOptionsModal";
-import LanguageScreen from "./screens/gameScreen/language/LanguageScreen";
+import BottomTabs from "./containers/BottomTabs";
 import BrainScreen from "./screens/gameScreen/brain/BrainScreen";
+import FlipCard from "./screens/gameScreen/brain/FlipCard/FlipCard";
+import MemoryTest2 from "./screens/gameScreen/brain/MemoryTest2/MemoryTest2";
 import FocusScreen from "./screens/gameScreen/focus/FocusScreen";
+import MemoryTest from "./screens/gameScreen/focus/MemoryTest/MemoryTest";
+import LanguageScreen from "./screens/gameScreen/language/LanguageScreen";
+import WordArrangement from "./screens/gameScreen/language/WordArrangement/WordArrangement";
 import WordMap from "./screens/gameScreen/language/WordMap/WordMap";
 import WordPredict from "./screens/gameScreen/language/WordPredict/WordPredict";
-import WordArrangement from "./screens/gameScreen/language/WordArrangement/WordArrangement";
+import MathScreen from "./screens/gameScreen/math/MathScreen";
 import CalculateScreen from "./screens/gameScreen/math/calculate/CalculateScreen";
-import Icon from "react-native-vector-icons/FontAwesome";
-import FlipCard from "./screens/gameScreen/brain/FlipCard/FlipCard";
-import MemoryTest from "./screens/gameScreen/brain/MemoryTest/MemoryTest";
-import MemoryTest2 from "./screens/gameScreen/brain/MemoryTest2/MemoryTest2";
+import FindSumScreen from "./screens/gameScreen/math/findSum/FindSumScreen";
+import LevelOptionsModal from "./screens/gameScreen/math/findSum/LevelOptionsModal";
+import ShoppingScreen from "./screens/gameScreen/math/shopping/ShoppingScreen";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -40,7 +37,7 @@ const App = () => {
             {/* Math Game */}
             <Stack.Screen
               name="Math"
-              options={{ title: "Math Game", headerBackTitle: " " }}
+              options={{ title: "Trò chơi tính toán", headerBackTitle: " " }}
               component={MathScreen}
             />
             <Stack.Screen
@@ -67,7 +64,7 @@ const App = () => {
             {/* Language Game */}
             <Stack.Screen
               name="Language"
-              options={{ title: "Language Game", headerBackTitle: " " }}
+              options={{ title: "Trò chơi ngôn ngữ", headerBackTitle: " " }}
               component={LanguageScreen}
             />
             <Stack.Screen
@@ -92,29 +89,29 @@ const App = () => {
             {/* Focus Game */}
             <Stack.Screen
               name="Focus"
-              options={{ title: "Focus Game", headerBackTitle: " " }}
+              options={{ title: "Trò chơi tập trung", headerBackTitle: " " }}
               component={FocusScreen}
             />
-
+            <Stack.Screen
+              name="MemoryTest"
+              options={{ title: "Nhớ vị trí màu", headerBackTitle: " " }}
+              component={MemoryTest}
+            />
             {/* Brain Game */}
             <Stack.Screen
               name="Brain"
-              options={{ title: "Brain Game", headerBackTitle: " " }}
+              options={{ title: "Trò chơi trí nhớ", headerBackTitle: " " }}
               component={BrainScreen}
             />
             <Stack.Screen
               name="FlipCard"
-              options={{ title: "Flip Card Game", headerBackTitle: " " }}
+              options={{ title: "Tìm thẻ giống nhau", headerBackTitle: " " }}
               component={FlipCard}
             />
-            <Stack.Screen
-              name="MemoryTest"
-              options={{ title: "Memory Test Game", headerBackTitle: " " }}
-              component={MemoryTest}
-            />
+
             <Stack.Screen
               name="MemoryTest2"
-              options={{ title: "Memory Test Game", headerBackTitle: " " }}
+              options={{ title: "Nhớ thứ tự màu", headerBackTitle: " " }}
               component={MemoryTest2}
             />
           </Stack.Navigator>

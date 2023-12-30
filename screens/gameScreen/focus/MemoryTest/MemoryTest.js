@@ -6,8 +6,10 @@ import {
   StyleSheet,
   Animated,
   Easing,
+  ImageBackground,
 } from "react-native";
 import Toast from "react-native-toast-message";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Card = ({ id, isFlipped, onPress }) => (
   <TouchableOpacity onPress={() => onPress(id)}>
@@ -223,21 +225,28 @@ const GameBoard = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.scoreContainer}>
-        <Text style={styles.scoreText}>Score: {score}</Text>
+    <ImageBackground
+      source={require("../../../../assets/bgImage.png")}
+      style={styles.image}
+    >
+      <View style={styles.container}>
+        <View style={styles.scoreContainer}>
+          <Text style={styles.scoreText}>
+            <Icon name="trophy" size={18} color="#fff" /> Điểm: {score}
+          </Text>
+        </View>
+        <View style={styles.gameBoard}>
+          {cards.map((card) => (
+            <Card
+              key={card.id}
+              id={card.id}
+              isFlipped={card.isFlipped}
+              onPress={handleCardPress}
+            />
+          ))}
+        </View>
       </View>
-      <View style={styles.gameBoard}>
-        {cards.map((card) => (
-          <Card
-            key={card.id}
-            id={card.id}
-            isFlipped={card.isFlipped}
-            onPress={handleCardPress}
-          />
-        ))}
-      </View>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -253,8 +262,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#f0f0f0",
+    // alignItems: "center",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
   },
   scoreContainer: {
     marginBottom: 20,
@@ -262,7 +275,8 @@ const styles = StyleSheet.create({
   scoreText: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#333",
+    color: "#fff",
+    textAlign: "center",
   },
   gameBoard: {
     flexDirection: "row",

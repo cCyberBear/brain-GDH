@@ -2,30 +2,25 @@ import React from "react";
 import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import { LinearGradient } from "expo-linear-gradient";
-import math1 from "../../../assets/math1.png";
-import math2 from "../../../assets/math2.png";
+import flipCard from "../../../assets/flipCard.jpeg";
+import angryImage from "../../../assets/angryImage.jpeg";
 import Card from "../../../components/shared/Card";
 
 const data = [
   {
     id: 1,
-    title: "Trò chơi lật mặt",
-    quanity: 4,
-    image: math2,
+    title: "Tìm Cặp Thẻ",
+    quanity: "Bạn hãy tìm và kết hợp các cặp thẻ giống nhau được úp xuống.",
+    image: flipCard,
     link: "FlipCard",
   },
+
   {
     id: 2,
-    title: "Kiểm tra trí nhớ",
-    quanity: 4,
-    image: math2,
-    link: "MemoryTest",
-  },
-  {
-    id: 3,
-    title: "Kiểm tra trí nhớ 2",
-    quanity: 4,
-    image: math2,
+    title: "Đánh Số Vị Trí Màu Sắc",
+    quanity:
+      "Bạn hãy đánh số vị trí ban đầu của các thẻ màu sau khi chúng bị xáo trộn.",
+    image: angryImage,
     link: "MemoryTest2",
   },
 ];
