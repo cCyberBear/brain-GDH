@@ -19,7 +19,9 @@ import WordPredict from "./screens/gameScreen/language/WordPredict/WordPredict";
 import WordArrangement from "./screens/gameScreen/language/WordArrangement/WordArrangement";
 import CalculateScreen from "./screens/gameScreen/math/calculate/CalculateScreen";
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import FlipCard from "./screens/gameScreen/brain/FlipCard/FlipCard";
+import MemoryTest from "./screens/gameScreen/brain/MemoryTest/MemoryTest";
+import MemoryTest2 from "./screens/gameScreen/brain/MemoryTest2/MemoryTest2";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -99,6 +101,21 @@ const App = () => {
               name="Brain"
               options={{ title: "Brain Game", headerBackTitle: " " }}
               component={BrainScreen}
+            />
+            <Stack.Screen
+              name="FlipCard"
+              options={{ title: "Flip Card Game", headerBackTitle: " " }}
+              component={FlipCard}
+            />
+            <Stack.Screen
+              name="MemoryTest"
+              options={{ title: "Memory Test Game", headerBackTitle: " " }}
+              component={MemoryTest}
+            />
+            <Stack.Screen
+              name="MemoryTest2"
+              options={{ title: "Memory Test Game", headerBackTitle: " " }}
+              component={MemoryTest2}
             />
           </Stack.Navigator>
           <Toast position="bottom" bottomOffset={80} visibilityTime={2000} />

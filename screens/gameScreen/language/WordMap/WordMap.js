@@ -246,7 +246,6 @@ const WordMap = ({ navigation }) => {
           text2: `Bạn được cộng ${curLevel * 100} điểm !`,
         });
         if (correctWords.length + 1 === words.length) {
-          console.log("dodasdasdasd");
           resetGame();
         }
       }
@@ -258,15 +257,13 @@ const WordMap = ({ navigation }) => {
   };
 
   const resetGame = () => {
-    try {
-      const newList = randomWords(BigList, levels[curLevel + 1].amount);
-      setWords(newList);
-      setGrid(generateGrid(newList, levels[curLevel + 1].gridSize));
-      setSelectedCells([]);
-      setCorrectWords([]);
-      setDisabledWords([]);
-      setCurLevel((pre) => pre + 1);
-    } catch (error) {}
+    const newList = randomWords(BigList, levels[curLevel + 1].amount);
+    setWords(newList);
+    setGrid(generateGrid(newList, levels[curLevel + 1].gridSize));
+    setSelectedCells([]);
+    setCorrectWords([]);
+    setDisabledWords([]);
+    setCurLevel((pre) => pre + 1);
   };
 
   useEffect(() => {
