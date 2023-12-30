@@ -14,6 +14,14 @@ const data = [
     image: colorImage,
     link: "MemoryTest",
   },
+  {
+    id: 2,
+    title: "Chọn màu khác biệt",
+    quanity:
+      "Bạn hãy tập trung để chọn thẻ có màu khác sắc độ với các thẻ khác.",
+    image: colorImage,
+    link: "ColorPicker",
+  },
 ];
 
 const FocusScreen = ({ navigation }) => {
