@@ -1,6 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import React, { useState, useEffect, useRef } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Pressable,
+  ImageBackground,
+  SafeAreaView,
+} from "react-native";
 import Toast from "react-native-toast-message";
+import Icon from "react-native-vector-icons/FontAwesome";
+import HowToPlayModel from "../../../../components/shared/HowToPlayModel";
+import { Modal } from "react-native";
+import { Image } from "react-native";
+
 const BigList = [
   "APPLE",
   "CLOUD",
@@ -95,8 +108,8 @@ const levels = {
   2: { gridSize: 7, amount: 6 },
   3: { gridSize: 8, amount: 9 },
   4: { gridSize: 9, amount: 11 },
-  5: { gridSize: 10, amount: 13 },
-  6: { gridSize: 10, amount: 15 },
+  // 5: { gridSize: 9, amount: 13 },
+  // 6: { gridSize: 9, amount: 15 },
 };
 const randomWords = (array, n) => {
   if (n > array.length) {
@@ -178,7 +191,10 @@ const generateGrid = (wordList, gridSize) => {
   return grid;
 };
 
-const WordMap = () => {
+const WordMap = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [score, setScore] = useState(0);
+  const [visibleHowToPlay, setVisibleHowToPlay] = useState(false);
   const [curLevel, setCurLevel] = useState(0);
   const [words, setWords] = useState([]);
   const [grid, setGrid] = useState([]);
@@ -214,6 +230,7 @@ const WordMap = () => {
         !disabledWords.includes(selectedWord)
       ) {
         // Correct word
+        setScore((preScore) => preScore + curLevel * 100);
         setCorrectWords((prevCorrectWords) => [
           ...prevCorrectWords,
           selectedWord,
@@ -226,6 +243,7 @@ const WordMap = () => {
         Toast.show({
           type: "success",
           text1: `CÂU TRẢ LỜI CHÍNH XÁC !!!: ${selectedWord}`,
+          text2: `Bạn được cộng ${curLevel * 100} điểm !`,
         });
         if (correctWords.length + 1 === words.length) {
           resetGame();
@@ -249,73 +267,151 @@ const WordMap = () => {
   };
 
   useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable
+          onPress={() => {
+            setVisibleHowToPlay(true);
+          }}
+        >
+          <Icon
+            name="question"
+            size={24}
+            color="grey"
+            style={{ paddingRight: 15 }}
+          />
+        </Pressable>
+      ),
+    });
     const newList = randomWords(BigList, levels[1].amount);
     setWords(newList);
     setGrid(generateGrid(newList, levels[1].gridSize));
     setCurLevel(1);
   }, []);
+
   return (
-    <View style={styles.container}>
-      <View style={styles.gridContainer}>
-        {grid.map((row, rowIndex) => (
-          <View key={rowIndex} style={styles.rowContainer}>
-            {row.map((cell, colIndex) => (
-              <TouchableOpacity
-                key={colIndex}
+    <SafeAreaView style={styles.container}>
+      <ImageBackground
+        source={require("../../../../assets/bgImage.png")}
+        style={styles.image}
+      >
+        <View style={styles.innerContainer}>
+          <View style={styles.title}>
+            <Text style={{ fontSize: 24, color: "#fff" }}>
+              <Icon name="trophy" size={16} color="#fff" /> Your Score:
+              <Text style={{ fontWeight: "bold" }}> {score}</Text>
+            </Text>
+            <Text style={{ fontSize: 24, color: "#fff" }}>
+              <Icon name="signal" size={16} color="#fff" /> Level:
+              <Text style={{ fontWeight: "bold" }}> {curLevel}</Text>
+            </Text>
+          </View>
+          <View style={styles.wordsContainer}>
+            {words.map((word, index) => (
+              <Text
+                key={index}
                 style={[
-                  styles.cell,
-                  selectedCells.some(
-                    (selectedCell) =>
-                      selectedCell.row === rowIndex &&
-                      selectedCell.col === colIndex
-                  )
-                    ? styles.selectedCell
-                    : null,
-                  disabledWords.some(
-                    (obj) => obj.row === rowIndex && obj.col === colIndex
-                  )
-                    ? styles.disabledCell
-                    : null,
+                  styles.word,
+                  correctWords.includes(word) ? styles.correctWord : null,
+                  //   incorrectWords.includes(word) ? styles.incorrectWord : null,
                 ]}
-                onPress={() => handleCellPress(rowIndex, colIndex)}
-                // disabled={disabledWords.some(
-                //   (obj) => obj.row === rowIndex && obj.col === colIndex
-                // )}
               >
-                <Text style={styles.cellText}>{cell}</Text>
-              </TouchableOpacity>
+                {word}
+              </Text>
             ))}
           </View>
-        ))}
-      </View>
-      <View style={styles.wordsContainer}>
-        {words.map((word, index) => (
-          <Text
-            key={index}
-            style={[
-              styles.word,
-              correctWords.includes(word) ? styles.correctWord : null,
-              //   incorrectWords.includes(word) ? styles.incorrectWord : null,
-            ]}
-          >
-            {word}
-          </Text>
-        ))}
-      </View>
-    </View>
+          <View style={styles.gridContainer}>
+            {grid.map((row, rowIndex) => (
+              <View key={rowIndex} style={styles.rowContainer}>
+                {row.map((cell, colIndex) => (
+                  <TouchableOpacity
+                    key={colIndex}
+                    style={[
+                      styles.cell,
+                      selectedCells.some(
+                        (selectedCell) =>
+                          selectedCell.row === rowIndex &&
+                          selectedCell.col === colIndex
+                      )
+                        ? styles.selectedCell
+                        : null,
+                      disabledWords.some(
+                        (obj) => obj.row === rowIndex && obj.col === colIndex
+                      )
+                        ? styles.disabledCell
+                        : null,
+                    ]}
+                    onPress={() => handleCellPress(rowIndex, colIndex)}
+                    // disabled={disabledWords.some(
+                    //   (obj) => obj.row === rowIndex && obj.col === colIndex
+                    // )}
+                  >
+                    <Text style={styles.cellText}>{cell}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            ))}
+          </View>
+          {visibleHowToPlay && (
+            <HowToPlayModel
+              visibleHowToPlay={visibleHowToPlay}
+              setVisibleHowToPlay={setVisibleHowToPlay}
+            />
+          )}
+        </View>
+        <Modal animationType="slide" transparent={true} visible={modalVisible}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Image
+                style={{ width: "50%", height: "50%" }}
+                source={require("../../../../assets/brain.png")}
+              />
+              <Text style={styles.modalText}>
+                Bạn đúng đã hoàn thành trò chơi !
+              </Text>
+              <Text style={styles.modalText}>
+                Số điểm của bạn là{" "}
+                <Text style={{ fontWeight: "bold", color: "green" }}>
+                  {score}
+                </Text>{" "}
+              </Text>
+
+              <View style={{ flexDirection: "row", gap: 14 }}>
+                <Pressable
+                  style={[styles.button, styles.buttonHome]}
+                  onPress={() => navigation.navigate("BottomTabs")}
+                >
+                  <Text style={styles.textStyle}>Trang chủ</Text>
+                </Pressable>
+              </View>
+            </View>
+          </View>
+        </Modal>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+    // opacity: 0.9,
+  },
+  title: {
+    margin: 20,
     alignItems: "center",
-    backgroundColor: "#f0f0f0", // Background color
   },
   gridContainer: {
     flexDirection: "column",
     marginVertical: 20,
+    alignItems: "center",
   },
   rowContainer: {
     flexDirection: "row",
@@ -344,8 +440,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     margin: 5,
     padding: 10,
-    backgroundColor: "#4CAF50", // Word box background color
-    color: "#ffffff", // Word text color
+    backgroundColor: "yellow", // Word box background color
+    color: "#333", // Word text color
     borderRadius: 5,
   },
   cell: {

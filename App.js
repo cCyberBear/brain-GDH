@@ -1,6 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
-import { Modal, StatusBar } from "react-native";
+import { Modal, Pressable, StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import BottomTabs from "./containers/BottomTabs";
 import changeNavigationBarColor from "react-native-navigation-bar-color";
@@ -17,6 +17,8 @@ import FocusScreen from "./screens/gameScreen/focus/FocusScreen";
 import WordMap from "./screens/gameScreen/language/WordMap/WordMap";
 import WordPredict from "./screens/gameScreen/language/WordPredict/WordPredict";
 import WordArrangement from "./screens/gameScreen/language/WordArrangement/WordArrangement";
+import CalculateScreen from "./screens/gameScreen/math/calculate/CalculateScreen";
+import Icon from "react-native-vector-icons/FontAwesome";
 import FlipCard from "./screens/gameScreen/brain/FlipCard/FlipCard";
 import MemoryTest from "./screens/gameScreen/brain/MemoryTest/MemoryTest";
 import MemoryTest2 from "./screens/gameScreen/brain/MemoryTest2/MemoryTest2";
@@ -56,6 +58,11 @@ const App = () => {
               options={{ title: "Game tính tổng", headerBackTitle: " " }}
               component={LevelOptionsModal}
             />
+            <Stack.Screen
+              name="Calculate"
+              options={{ title: "Game tính tổng", headerBackTitle: " " }}
+              component={CalculateScreen}
+            />
 
             {/* Language Game */}
             <Stack.Screen
@@ -65,7 +72,10 @@ const App = () => {
             />
             <Stack.Screen
               name="WordMap"
-              options={{ title: "Ma trận chữ", headerBackTitle: " " }}
+              options={{
+                title: "Ma trận chữ",
+                headerBackTitle: " ",
+              }}
               component={WordMap}
             />
             <Stack.Screen

@@ -1,14 +1,16 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Modal, Pressable, StyleSheet, Text, View } from "react-native";
 
 const LevelOptionsModal = ({ modalVisible, setModalVisible }) => {
   const navigation = useNavigation();
+  const [count, setCount] = useState(0);
   const levels = [
-    { id: 1, level: 1 },
-    { id: 2, level: 2 },
-    { id: 3, level: 3 },
+    { id: 1, level: 1, unlock: true },
+    { id: 2, level: 2, unlock: false },
+    { id: 3, level: 3, unlock: false },
   ];
+
   return (
     <Modal animationType="slide" transparent={true} visible={modalVisible}>
       <View style={styles.centeredView}>
@@ -21,7 +23,9 @@ const LevelOptionsModal = ({ modalVisible, setModalVisible }) => {
             {levels.map((value, index) => (
               <Pressable
                 key={index}
-                style={[styles.button, styles.buttonClose]}
+                // style={value.unlock ? styles.button : styles.disableButton}
+                style={styles.button}
+                // disabled={!value.unlock}
                 onPress={() => {
                   navigation.navigate("FindSum", {
                     level: value.level,
@@ -67,13 +71,17 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 4,
     padding: 10,
+    backgroundColor: "blue",
+  },
+  disableButton: {
+    borderRadius: 4,
+    padding: 10,
+    backgroundColor: "red",
+    opacity: 0.5,
   },
   buttonHome: {
     color: " grey",
     backgroundColor: "grey",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
   },
   textStyle: {
     color: "white",
