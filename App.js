@@ -19,6 +19,7 @@ import CalculateScreen from "./screens/gameScreen/math/calculate/CalculateScreen
 import FindSumScreen from "./screens/gameScreen/math/findSum/FindSumScreen";
 import LevelOptionsModal from "./screens/gameScreen/math/findSum/LevelOptionsModal";
 import ShoppingScreen from "./screens/gameScreen/math/shopping/ShoppingScreen";
+import ColorPicker from "./screens/gameScreen/focus/Color/ColorPicker";
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -96,6 +97,11 @@ const App = () => {
               name="MemoryTest"
               options={{ title: "Nhớ vị trí màu", headerBackTitle: " " }}
               component={MemoryTest}
+            />
+            <Stack.Screen
+              name="ColorPicker"
+              options={{ title: "Chọn màu khác biệt", headerBackTitle: " " }}
+              component={ColorPicker}
             />
             {/* Brain Game */}
             <Stack.Screen
