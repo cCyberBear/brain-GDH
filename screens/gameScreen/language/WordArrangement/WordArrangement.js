@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, ImageBackground, Text } from "react-native";
 import WordDisplay from "./WordDisplay";
 import LetterTile from "./LetterTile";
 import Toast from "react-native-toast-message";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const levels = {
   1: [
@@ -152,6 +153,7 @@ const levels = {
 const WordArrangement = () => {
   const [word, setWord] = useState("");
   const [count, setCount] = useState(0);
+  const [score, setScore] = useState(0);
   const [shuffledWord, setShuffledWord] = useState(
     word
       .split("")
@@ -174,12 +176,14 @@ const WordArrangement = () => {
             text1: "chúc mừng bạn đã đoán đúng",
             type: "success",
           });
+          setScore(score + 100);
         } else {
           createWordOnLevel(2);
           Toast.show({
             text1: "chúc mừng bạn đã đoán đúng",
             type: "success",
           });
+          setScore(score + 200);
         }
       } else {
         Toast.show({
@@ -212,16 +216,24 @@ const WordArrangement = () => {
 
   return (
     <View style={styles.container}>
-      <WordDisplay word={selectedLetters} />
-      <View style={styles.tileContainer}>
-        {shuffledWord.split("").map((letter, index) => (
-          <LetterTile
-            key={index}
-            letter={letter}
-            onPress={() => handleTilePress(index)}
-          />
-        ))}
-      </View>
+      <ImageBackground
+        source={require("../../../../assets/bgImage.png")}
+        style={styles.image}
+      >
+        <Text style={styles.scoreText}>
+          <Icon name="trophy" size={18} color="#fff" /> Điểm: {score}
+        </Text>
+        <WordDisplay word={selectedLetters} />
+        <View style={styles.tileContainer}>
+          {shuffledWord.split("").map((letter, index) => (
+            <LetterTile
+              key={index}
+              letter={letter}
+              onPress={() => handleTilePress(index)}
+            />
+          ))}
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -230,8 +242,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ecf0f1",
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
+  scoreText: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
+    textAlign: "center",
   },
   tileContainer: {
     flexDirection: "row",

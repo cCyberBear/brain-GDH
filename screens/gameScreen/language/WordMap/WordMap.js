@@ -440,8 +440,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     margin: 5,
     padding: 10,
-    backgroundColor: "yellow", // Word box background color
-    color: "#333", // Word text color
+    backgroundColor: "#3498db", // Word box background color
+    color: "#fff", // Word text color
     borderRadius: 5,
   },
   cell: {

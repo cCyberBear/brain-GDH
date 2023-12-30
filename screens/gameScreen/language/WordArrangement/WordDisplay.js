@@ -27,9 +27,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   letter: {
-    color: "#333",
+    color: "#fff",
     fontSize: 24,
     fontWeight: "bold",
+    textTransform: "uppercase",
+    paddingTop: 14,
   },
 });
 

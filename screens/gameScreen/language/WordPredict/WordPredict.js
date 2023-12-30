@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
+  ImageBackground,
   StyleSheet,
   Text,
   TextInput,
@@ -8,7 +9,8 @@ import {
   View,
 } from "react-native";
 import Toast from "react-native-toast-message";
-import Icon from "react-native-vector-icons/Feather";
+import Icon from "react-native-vector-icons/FontAwesome";
+
 const WordPredict = () => {
   const [dictionary, setDictionary] = useState("");
   const [score, setScore] = useState(0);
@@ -59,12 +61,7 @@ const WordPredict = () => {
       try {
         const { data } = await axios.get("https://vnkd.dev/words.json");
         setDictionary(data);
-      } catch (error) {
-        console.log(
-          "🚀 ~ file: WordPredict.js:65 ~ loadDictionary ~ error:",
-          error
-        );
-      }
+      } catch (error) {}
     };
 
     loadDictionary();
@@ -94,10 +91,15 @@ const WordPredict = () => {
   };
 
   return (
-    <View style={styles.bg}>
-      <Text style={styles.prompt}>Your score: {score * 100}</Text>
+    <ImageBackground
+      source={require("../../../../assets/bgImage.png")}
+      style={styles.image}
+    >
+      <Text style={styles.prompt}>
+        <Icon name="trophy" size={18} color="#fff" /> Điểm: {score * 100}
+      </Text>
       <View style={styles.container}>
-        <Text style={styles.prompt}>
+        <Text style={styles.question}>
           Enter the appropriate word starting with letter {initLet}______:
         </Text>
         <View style={styles.bottom}>
@@ -117,21 +119,15 @@ const WordPredict = () => {
             style={styles.buttonContainer}
             onPress={onPressSend}
           >
-            <Icon name="send" color="#fff" size={33} />
+            <Icon name="send" color="#fff" size={20} />
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  bg: {
-    flex: 1,
-    backgroundColor: "#eab676",
-    alignItems: "center",
-    justifyContent: "flex-start",
-  },
   container: {
     backgroundColor: "#fff",
     alignItems: "center",
@@ -139,6 +135,11 @@ const styles = StyleSheet.create({
     padding: 30,
     margin: 30,
     borderRadius: 10,
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "flex-start",
   },
   textBox: {
     backgroundColor: "#fff",
@@ -163,6 +164,14 @@ const styles = StyleSheet.create({
     color: "#aaa",
   },
   prompt: {
+    textAlign: "center",
+    fontSize: 22,
+    color: "#fff",
+    lineHeight: 50,
+    fontWeight: "bold",
+    marginTop: 14,
+  },
+  question: {
     textAlign: "center",
     fontSize: 22,
     color: "#333",

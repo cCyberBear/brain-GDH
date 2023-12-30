@@ -6,7 +6,9 @@ import {
   StyleSheet,
   Image,
   Animated,
+  ImageBackground,
 } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const FlipCard = () => {
   const [level, setLevel] = useState(1);
@@ -133,17 +135,24 @@ const FlipCard = () => {
   }, [selectedCards]);
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Card Flipping Game - Level {level}</Text>
-      <Text style={styles.moves}>Moves: {moves}</Text>
-      <View style={styles.cardGrid}>{renderCards()}</View>
-      {cards.every((card) => card.matched) && (
-        <TouchableOpacity
-          onPress={handleLevelComplete}
-          style={styles.nextLevelButton}
-        >
-          <Text style={styles.nextLevelButtonText}>Next Level</Text>
-        </TouchableOpacity>
-      )}
+      <ImageBackground
+        source={require("../../../../assets/bgImage.png")}
+        style={styles.image}
+      >
+        <Text style={styles.header}>
+          <Icon name="trophy" size={18} color="#fff" /> Level {level}
+        </Text>
+        <Text style={styles.moves}>Moves: {moves}</Text>
+        <View style={styles.cardGrid}>{renderCards()}</View>
+        {cards.every((card) => card.matched) && (
+          <TouchableOpacity
+            onPress={handleLevelComplete}
+            style={styles.nextLevelButton}
+          >
+            <Text style={styles.nextLevelButtonText}>Next Level</Text>
+          </TouchableOpacity>
+        )}
+      </ImageBackground>
     </View>
   );
 };
@@ -155,16 +164,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#f0f0f0",
   },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
   header: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 10,
-    color: "#333",
+    color: "#fff",
+    textAlign: "center",
   },
   moves: {
     fontSize: 18,
     marginBottom: 20,
-    color: "#555",
+    color: "#fff",
+    textAlign: "center",
   },
   cardGrid: {
     flexDirection: "row",

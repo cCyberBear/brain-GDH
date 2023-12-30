@@ -18,7 +18,7 @@ const Card = ({ item, navigation }) => {
             <Text style={styles.mainText}>{item.title}</Text>
           </View>
           <View>
-            <Text style={styles.subText}>{item?.guidance}</Text>
+            <Text style={styles.subText}>{item?.quanity}</Text>
           </View>
         </View>
       </View>

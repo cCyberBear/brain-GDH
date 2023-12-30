@@ -10,25 +10,25 @@ import CardOptions from "../../../components/shared/CardOptions";
 const data = [
   {
     id: 1,
-    title: "Trò chơi mua sắm",
-    quanity: 4,
+    title: "Mua Sắm Tiết Kiệm",
+    quanity: "Bạn hãy chọn giá tiền thấp hơn khi mua sắm.",
     image: math2,
     link: "Shopping",
   },
   {
     id: 2,
-    title: "Trò chơi tính toán",
-    quanity: 2,
+    title: "Trò chơi tính tổng",
+    quanity: "Bạn hãy chọn 2 option sao cho tổng của chúng bằng bội số của 10",
     image: math1,
     link: "FindSum",
   },
-  {
-    id: 3,
-    title: "Trò chơi tính",
-    quanity: 2,
-    image: math1,
-    link: "Calculate",
-  },
+  // {
+  //   id: 3,
+  //   title: "Trò chơi tính",
+  //   quanity: "",
+  //   image: math1,
+  //   link: "Calculate",
+  // },
 ];
 
 const MathScreen = ({ navigation }) => {
