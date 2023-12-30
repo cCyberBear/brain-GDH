@@ -13,6 +13,7 @@ const data = [
     quanity: 4,
     image: math2,
     link: "WordMap",
+    guidance: "Bạn hãy....",
   },
   {
     id: 2,
@@ -20,6 +21,7 @@ const data = [
     quanity: 4,
     image: math2,
     link: "WordPredict",
+    guidance: "Bạn hãy....",
   },
   {
     id: 3,
@@ -27,6 +29,7 @@ const data = [
     quanity: 4,
     image: math2,
     link: "WordArrangement",
+    guidance: "Bạn hãy....",
   },
 ];
 

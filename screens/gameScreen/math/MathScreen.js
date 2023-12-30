@@ -22,6 +22,13 @@ const data = [
     image: math1,
     link: "FindSum",
   },
+  {
+    id: 3,
+    title: "Trò chơi tính",
+    quanity: 2,
+    image: math1,
+    link: "Calculate",
+  },
 ];
 
 const MathScreen = ({ navigation }) => {

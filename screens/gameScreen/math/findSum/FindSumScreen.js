@@ -8,6 +8,7 @@ import {
   Modal,
   Image,
   Pressable,
+  TouchableOpacity,
 } from "react-native";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import Carousel from "react-native-snap-carousel";
@@ -15,7 +16,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import BoxQuestion from "./BoxQuestion";
 
 const FindSumScreen = ({ route, navigation }) => {
-  const { level } = route.params;
+  let { level } = route.params;
   const carouselRef = useRef(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -90,12 +91,15 @@ const FindSumScreen = ({ route, navigation }) => {
     if (count == 2) {
       setIsPlaying(false);
       setModalVisible(true);
+      if (score >= 300) {
+      }
     }
   };
 
   useEffect(() => {
     generate15Questions();
   }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -116,6 +120,7 @@ const FindSumScreen = ({ route, navigation }) => {
               onComplete={onFinish}
               size={80}
               isPlaying={isPlaying}
+              // isPlaying={false}
               duration={8}
               colors={"grey"}
               key={key}
@@ -135,7 +140,7 @@ const FindSumScreen = ({ route, navigation }) => {
                 renderItem={renderCard}
                 sliderWidth={335}
                 itemWidth={335}
-                scrollEnabled={true}
+                scrollEnabled={false}
                 onSnapToItem={(index) => setCurrentIndex(index)}
                 enableSnap={true}
                 loop={false}
@@ -157,10 +162,10 @@ const FindSumScreen = ({ route, navigation }) => {
                 </Text>{" "}
               </Text>
               <Text style={styles.modalText}>
-                Bạn đúng
+                Bạn đúng{" "}
                 <Text style={{ fontWeight: "bold", color: "green" }}>
-                  {score}
-                </Text>{" "}
+                  {score / 300}
+                </Text>
                 /15 câu
               </Text>
               <View style={{ flexDirection: "row", gap: 14 }}>

@@ -4,6 +4,7 @@ import Toast from "react-native-toast-message";
 
 const BoxQuestion = ({ item, setScore, setIsPlaying, level, currentIndex }) => {
   const [array, setArray] = useState([item]);
+  const [tempArray, setTempArray] = useState([item]);
   let rightAnswer;
   switch (level) {
     case 2:
@@ -48,22 +49,27 @@ const BoxQuestion = ({ item, setScore, setIsPlaying, level, currentIndex }) => {
     return Object.entries(obj).map(([key, value]) => ({ [key]: value }));
   });
   const shuffleArray = () => {
-    const shuffledItems = [...transformedArray];
-    for (let i = shuffledItems.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffledItems[i], shuffledItems[j]] = [
-        shuffledItems[j],
-        shuffledItems[i],
-      ];
+    let shuffledItems = [...transformedArray];
+    let temp;
+    if (currentIndex >= 0 && currentIndex < 8) {
+      temp = shuffledItems.slice(0, 5);
+    } else if (currentIndex >= 8 && currentIndex < 13) {
+      temp = shuffledItems.slice(0, 6);
+    } else {
+      temp = shuffledItems.slice(0, 7);
     }
-    setArray(shuffledItems);
-  };
 
-  const filteredArray = array.filter((value) => !("id" in value));
+    for (let i = temp.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [temp[i], temp[j]] = [temp[j], temp[i]];
+    }
+    setTempArray(temp);
+  };
+  const filteredArray = tempArray?.filter((value) => !("id" in value));
 
   useEffect(() => {
     shuffleArray();
-  }, []);
+  }, [currentIndex]);
 
   return (
     <>
@@ -77,7 +83,7 @@ const BoxQuestion = ({ item, setScore, setIsPlaying, level, currentIndex }) => {
       >
         Câu hỏi {item.id}
       </Text>
-      <Text style={styles.question}>Hai số nào có tổng bằng 100</Text>
+      <Text style={styles.question}>Hai số nào có tổng bằng {rightAnswer}</Text>
       {filteredArray.map((item, index) => {
         const key = Object.keys(item)[0];
         const value = item[key];
